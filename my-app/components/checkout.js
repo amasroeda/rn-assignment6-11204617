@@ -33,18 +33,25 @@ const CartScreen = () => {
         renderItem={({ item }) => (
           <View style={styles.product}>
             <Image source={item.image} style={styles.image} />
-            <Text>{item.name}</Text>
-            <Text>{item.description}</Text>
-            <Text>{item.price}</Text>
-            <TouchableOpacity onPress={() => removeFromCart(item)}>
+            <View style={styles.inner}>
+              <Text style={styles.name}>{item.name} </Text>
+              <Text style={styles.description}>{item.description} </Text>
+              <Text style={styles.price}>{item.price} </Text>
+            </View>
+              <TouchableOpacity onPress={() => removeFromCart(item)}>
               <Image source={require('../assets/remove.png')} style={styles.remove} />
             </TouchableOpacity>
           </View>
         )}
         ListHeaderComponent={() => (
-          <View style={styles.header}>
-            <Image source={require('../assets/Logo.png')} style={styles.logo} />
-            <Image source={require('../assets/Search.png')} style={styles.search} />
+          <View>
+            <View style={styles.header}>
+              <Image source={require('../assets/Logo.png')} style={styles.logo} />
+              <Image source={require('../assets/Search.png')} style={styles.search} />
+            </View>
+            <View>
+              <Text style={styles.text}>C H E C K O U T</Text>
+            </View>
           </View>
         )}
       />
@@ -54,33 +61,56 @@ const CartScreen = () => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
+    margin: 22,
   },
   header: {
+    marginLeft: 90,
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 16,
   },
-  sectionHeader: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    marginVertical: 16,
+  logo: {
+    height: 41,
+    width: 100,
+    marginLeft: 27
+  },
+  search: {
+    height: 25,
+    width: 25
+  },
+  text:{
+    marginVertical: 30,
+    textAlign:'center',
+    fontSize: 20,
+    textDecorationLine: 'underline',
+  },
+  inner:{
+    gap: 5
   },
   product: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    marginBottom: 16,
+    marginBottom: 25,
   },
   image: {
-    width: 50,
-    height: 50,
+    width: 120,
+    height: 160,
   },
   remove: {
-    width: 30,
-    height: 30,
+    width: 25,
+    height: 25,
+    transform: [{ translateX: -70 }, { translateY: 90 }],
+  },
+  name:{
+    fontSize: 15,
+    marginTop: 24
+  },
+  description:{
+    color : '#555555',
+    fontSize: 13,
+  },
+  price:{
+    color: '#DD8560',
+    fontSize: 14,
   },
 });
 

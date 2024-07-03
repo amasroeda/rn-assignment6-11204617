@@ -42,15 +42,16 @@ const HomeScreen = ({ navigation }) => {
       <FlatList
         data={PRODUCTS}
         keyExtractor={(item) => item.id}
+        numColumns={2}
         renderItem={({ item }) => (
           <View style={styles.product}>
             <Image source={item.image} style={styles.image} />
             <TouchableOpacity onPress={() => addToCart(item)}>
-              <Image source={require('../assets/add_circle.png')} style={styles.addToCartImage} />
+              <Image source={require('../assets/add_circle.png')} style={styles.addCircle} />
             </TouchableOpacity>
-            <Text>{item.name}</Text>
-            <Text>{item.description}</Text>
-            <Text>{item.price}</Text>
+            <Text style={styles.name}>{item.name}</Text>
+            <Text style={styles.description}>{item.description}</Text>
+            <Text style={styles.price}>{item.price}</Text>
           </View>
         )}
         ListHeaderComponent={() => (
@@ -77,7 +78,9 @@ const HomeScreen = ({ navigation }) => {
           </>
         )}
         ListFooterComponent={() => (
-          <Button title="Go to Cart" onPress={() => navigation.navigate('Cart')} />
+          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cart')}>
+            <Text style={styles.buttonText}>Go to Cart</Text>
+          </TouchableOpacity>
         )}
       />
     </SafeAreaView>
@@ -86,44 +89,87 @@ const HomeScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    padding: 16,
+    margin: 22,
   },
   product: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
     marginBottom: 16,
+  },
+  image:{
+    width: 155,
+    marginRight: 20,
+  },
+  addCircle:{
+    transform: [{ translateX: 125 }, { translateY: -30 }],
+  },
+  name:{
+    fontSize: 15,
+    marginTop: -16
+  },
+  description:{
+    color : '#555555',
+    fontSize: 11,
+  },
+  price:{
+    color: '#DD8560',
+    fontSize: 14,
   },
   header: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    paddingBottom: 16,
+  },
+  menu: {
+    height: 30,
+    width: 20
+  },
+  logo: {
+    height: 41,
+    width: 100,
+    marginLeft: 27
+  },
+  innerHeader:{
+    display: 'flex',
+    flexDirection: 'row',
+    gap: 9,
+  },
+  search: {
+    height: 25,
+    width: 25
+  },
+  shoppingBag: {
+    height: 25,
+    width: 25
   },
   sectionHeading: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 16,
+    marginVertical: 30,
+    alignItems: 'center'
   },
   ourStory: {
-    fontSize: 24,
-    fontWeight: 'bold',
+    fontSize: 20,
   },
-  imageWrapper: {
-    marginHorizontal: 8,
-  },
+  imageWrapper:{
+    backgroundColor:'#E8E8E8',
+    padding: 10,
+    borderRadius: 40,
+},
   icons: {
     flexDirection: 'row',
-  },
-  image: {
-    width: 50,
-    height: 50,
+    gap: 10,
   },
   addToCartImage: {
     width: 30,
     height: 30,
   },
+  button:{
+    color: 'black',
+    backgroundColor:'#E8E8E8',
+    padding: 10,
+  },
+  buttonText:{
+     textAlign: 'center'
+  }
 });
 
 export default HomeScreen;
